@@ -1,6 +1,7 @@
 
 # bin folder
 bin/
+.settings/ 
 
 # Compiled class file
 *.class
