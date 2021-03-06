@@ -1,5 +1,10 @@
 package com.lafin.knowledge.ds;
 
+/**
+ * 스택 구조 제네릭 인터페이스 
+ * @author lafin
+ * @param <E>
+ */
 interface Stack<E>{
     boolean isEmpty();
     boolean isFull();
@@ -9,6 +14,11 @@ interface Stack<E>{
     void clear();
 }
 
+/**
+ * 스택 구조 클래스 
+ * @author lafin
+ * @param <T>
+ */
 public class ArrayStack<T> implements Stack<T> {
 
     // 스택의 고정 크기
