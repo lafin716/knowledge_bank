@@ -9,7 +9,7 @@ interface Stack<E>{
     void clear();
 }
 
-public class ArrayStack<T> implements Stack {
+public class ArrayStack<T> implements Stack<T> {
 
     // 스택의 고정 크기
     int initSize;
@@ -37,7 +37,7 @@ public class ArrayStack<T> implements Stack {
 
     @Override
     public boolean isEmpty() {
-        return data.length == 0;
+        return stackSize == 0;
     }
 
     @Override
@@ -76,6 +76,14 @@ public class ArrayStack<T> implements Stack {
     public void clear() {
         init(initSize);
     }
+    
+    public int size() {
+    	return stackSize;
+    }
+    
+    public int realSize() {
+    	return data.length;
+    }
 
     public static void main(String[] ar){
         int size = 10;
@@ -93,7 +101,11 @@ public class ArrayStack<T> implements Stack {
         stack.push("열번째");
         stack.push("열한번째");
         stack.push("열두번째");
-
+        stack.pop();
+        stack.pop();
+        
+        System.out.println("데이터 사이즈 : " + stack.size());
+        System.out.println("배열 사이즈 : " + stack.realSize());
 
         stack.pop();
         stack.pop();
@@ -101,9 +113,6 @@ public class ArrayStack<T> implements Stack {
         System.out.println(stack.isFull());
         System.out.println(stack.pop());
         System.out.println(stack.peek());
-
-        stack.clear();
-
         System.out.println(stack.isEmpty());
         System.out.println(stack.isFull());
         System.out.println(stack.pop());
