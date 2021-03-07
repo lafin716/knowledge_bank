@@ -36,12 +36,12 @@ public class LinkedList<T> {
 		// 만약 마지막에 등록된 노드가 없는 경우 최초노드 설정
 		if(headNode == null) {
 			headNode = newNode;			
-		}else {			
+		}else {
 			// 마지막 노드를 불러온다
 			Node lastNode = currentNode;
 			
 			// 마지막 노드의 다음객체값을 새로 생성한 노드로 지정
-			lastNode.next = newNode;			
+			lastNode.next = newNode;
 		}
 		
 		// 현재 노드객체를 새로만든 객체로 바꾼다.
@@ -98,6 +98,8 @@ public class LinkedList<T> {
 		linkedList.delete();
 		linkedList.add("목요일");
 		linkedList.add("금요일");
+		linkedList.delete();
+		linkedList.delete();
 		linkedList.add("토요일");
 		linkedList.print();
 	}
