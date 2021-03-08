@@ -14,7 +14,7 @@
 	- [DynamicArray](./DynamicArray.java) : 데이터 갯수에 따라 자동으로 리사이징하는 배열 클래스
 	- [LinkedList](./LinkedList.java) : 기본 링크드리스트 자료구조 클래스
 2. Stack
-	- [ArrayStack](./Arraystack.java) : 기본 스택 자료구조 클래스
+	- [ArrayStack](./ArrayStack.java) : 기본 스택 자료구조 클래스
 3. Queue
 	- [Queue](./Queue.java) : 기본 큐 자료구조 클래스
 4. Deque
@@ -23,6 +23,7 @@
 ## Non-Linear Structure (비선형구조)
 - 비선형구조는 순서성을 보장하지않는 자료구조로 하나의 자료 뒤에 여러개의 자료가 존재할 수 있다.
 1. Tree
+	- [Binary Search Tree](./BinarySearchTree.java) : 기본 이진탐색트리 자료구조 클래스
 2. Graph
 3. HashTable
 	- [HashTable](./HashTable.java) : 기본 해시테이블 자료구조 클래스
