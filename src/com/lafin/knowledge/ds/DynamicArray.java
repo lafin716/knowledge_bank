@@ -52,7 +52,7 @@ public class DynamicArray<T> {
 	
 	// 인덱스를 지정하여 객체 치환
 	// 인덱스 번호가 실제 데이터 최대인덱스 보다 큰 값이면 마지막에 추가하는거로 처리
-	public void add(int index, T data) {
+	public void set(int index, T data) {
 		
 		// 인덱스가 사이즈보다 작을때 해당 인덱스에 있는 값을 치환
 		if(index < size) {
@@ -128,7 +128,7 @@ public class DynamicArray<T> {
 		list.remove(4);
 		list.remove(20);
 		
-		list.add(20, 999);
+		list.set(20, 999);
 		
 		list.print();
 		
