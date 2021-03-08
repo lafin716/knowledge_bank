@@ -1,4 +1,4 @@
-package com.lafin.knowledge_bank.algorithm;
+package com.lafin.knowledge.algorithm;
 
 import com.lafin.knowledge.ds.DynamicArray;
 
