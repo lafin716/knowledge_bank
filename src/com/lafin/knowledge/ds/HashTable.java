@@ -87,7 +87,7 @@ public class HashTable<K,V>{
 			Node<K,V> tmpNode = headNode;
 			
 			do {
-				if(tmpNode.key == key) {
+				if(tmpNode.key.equals(key)) {
 					tmpNode.value = value;
 					break;
 				}
@@ -118,34 +118,32 @@ public class HashTable<K,V>{
 	public void remove(K key) {
 		int hash = hash(key);
 		int index = getIndex(hash);
-		Node<K,V> headNode = table[index];
+		Node headNode = table[index];
 		
 		if(headNode == null) {
 			return;
 		}else {
 			
-			Node<K,V> prevNode = null;
-			do {
-				System.out.println(key);
-				System.out.println(headNode.key);
-				if(headNode.key.equals(key)) {
-					
-					if(prevNode == null && headNode.next != null) {
-						table[index] = headNode.next;
-					}else if(prevNode != null && headNode.next != null) {
-						prevNode.next = headNode.next;
-					}
-					
-					headNode = null;
-					size--;
-					break;
-				}
-				
+			// 이전 노드
+			Node prevNode = null;
+			
+			// 노드의 키값이 맞을 떄 까지 반복
+			while(headNode != null && !headNode.key.equals(key)) {
 				prevNode = headNode;
 				headNode = headNode.next;
-			}while(headNode != null);
-		}
-		
+			}
+			
+			// headNode가 null인 경우 데이터를 못찾은 것이므로 바로 리턴
+			if(headNode == null) return;
+			
+			// prevNode가 null인 경우 제일 첫번째 노드이므로 table에 바로 세팅
+			if(prevNode == null) {
+				table[index] = headNode.next;
+			}else {
+				// 데이터가 있는 경우 해당 키값을 찾은 것이므로 이전노드의 next 값을 현재노드의 next값으로 다시 연결
+				prevNode.next = headNode.next;
+			}			
+		}		
 	}
 	
 	// 키가 존재하는지 여부
@@ -231,12 +229,15 @@ public class HashTable<K,V>{
 		map.put("test1", "test1 바뀜");		
 		System.out.println(map.get("test3"));
 		
+		System.out.println("중간 출력 :: ");
+		map.print();
+		
 		// 키 포함 여부
 		System.out.println("test1 키 포함 여부 : " + map.containsKey("test1"));
 		System.out.println("pjw 키 포함 여부 : " + map.containsKey("pjw"));
 		
 		// 데이터 삭제
-		map.remove("1");
+		map.remove("test3");
 		map.remove("2");
 		map.remove("3");
 		map.remove("test4");
@@ -246,6 +247,7 @@ public class HashTable<K,V>{
 		
 		// 해시테이블 전체 출력
 		// 인덱스 번호는 해시코드에 의해 랜덤하게 지정되므로 순서성을 보장하지 않음
+		System.out.println("최종 출력 :: ");
 		map.print();
 		
 	}
