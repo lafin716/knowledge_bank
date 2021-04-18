@@ -127,12 +127,11 @@ public class BinarySearchTree<T extends Integer> {
 		return search(root.rnode, data);
 	}
 	
-	// 트리의 노드들의 크기를 비교하여 재정렬한다
-	
 	
 	// 출력
 	public void print() {
 		inOrder(rootNode);
+		System.out.println();
 	}
 	
 	// 중위 순회
@@ -161,10 +160,9 @@ public class BinarySearchTree<T extends Integer> {
 		
 		bst.print();
 		
-		System.out.println("");
-		
 		bst.deleteNode(10);
 		bst.deleteNode(17);
+		bst.deleteNode(2);
 		
 		bst.print();
 	}
