@@ -1,4 +1,4 @@
-package com.lafin.knowledge.algorithm;
+package com.lafin.knowledge.algorithm.sort;
 
 import com.lafin.knowledge.ds.DynamicArray;
 

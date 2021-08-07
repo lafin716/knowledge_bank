@@ -1,4 +1,4 @@
-package com.lafin.knowledge.algorithm;
+package com.lafin.knowledge.algorithm.search;
 
 import com.lafin.knowledge.ds.LinkedList;
 
