@@ -82,9 +82,10 @@ public class LinkedList<T> {
 		Node node = headNode;
 		
 		while(node != null) {
-			System.out.println(node.data.toString());
+			System.out.print(node.data.toString() + " -> ");
 			node = node.next;
 		}
+		System.out.println();
 	}
 	
 	// 테스트

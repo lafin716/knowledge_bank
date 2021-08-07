@@ -109,9 +109,11 @@ public class DynamicArray<T> {
 	// 배열 출력
 	public void print() {
 		
+		System.out.print("[");
 		for(int i=0; i<size; i++) {
-			System.out.println(dataList[i].toString());			
+			System.out.print(dataList[i].toString()+",");
 		}
+		System.out.println("]");
 	}
 	
 	
