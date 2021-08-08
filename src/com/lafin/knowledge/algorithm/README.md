@@ -1,6 +1,14 @@
 ## Algorithm
-- 기본 알고리즘 클래스 모음
-- 알고리즘을 구현하기 위한 자료구조의 사용은 [자료구조 패키지](../ds/)에서 import하여 사용한다.
+- 알고리즘 클래스 모음
 
 ## Sort
-- [Bubble Sort](./BubbleSort.java) : 버블정렬 클래스
+- [Bubble Sort](./sort/BubbleSort.java) : 버블정렬 클래스
+
+## Dynamic Programming
+- [막대기 자르기](./dp/CutStick.java)
+- [피보나치 수열](./dp/Fibonacci.java)
+
+## 문제 모음
+- [백준 문제 모음](./baekjoon)
+- [프로그래머스 문제 모음](./programmers)
+

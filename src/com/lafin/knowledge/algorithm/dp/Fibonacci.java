@@ -1,5 +1,9 @@
 package com.lafin.knowledge.algorithm.dp;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+
 /**
  * 피보나치 수열 클래스
  * 동적 프로그래밍으로 구현한 피보나치 수열
@@ -15,16 +19,16 @@ public class Fibonacci {
 
     // bottom-up 방식
     // 작은 문제부터 차근차근 구한다 
-    public int bottomUp(int n) {
+    public long bottomUp(long n) {
         if (n <= 1) return n;
 
         // 결과값
-        int result = 0;
+        long result = 0;
 
         // 첫번째 수열의 합 (n=1인 경우를 위해 0으로 설정)
-        int first = 0;
+        long first = 0;
         // 두번째 수열의 합
-        int second = 1;
+        long second = 1;
 
         // n 이전 수열의 합을 차례로 구해 올라가서 총합을 구한다
         for (int i = 0; i < n-1; i++) {
@@ -39,9 +43,10 @@ public class Fibonacci {
     // top-down 방식
     // 재귀함수를 이용한다
     int[] memo;
-    public int topDown(int n) {
+    public long topDown(int n) {
         // 미리 배열을 생성 후에 아래 재귀함수에서 차례로 채워 넣는다
-        memo = new int[n + 1];
+        int size = n + 1;
+        memo = new int[size];
         return recursiveTopDown(n);
     }
 
@@ -58,13 +63,14 @@ public class Fibonacci {
     }
 
     
-    public static void main(String[] args) {
+    public static void main(String[] args) throws NumberFormatException, IOException {
         Fibonacci fibonacci = new Fibonacci();
+        // 속도를 위해 Scanner가 아닌 BufferedReader 사용
+        BufferedReader sc = new BufferedReader(new InputStreamReader(System.in));
+
+        long n = Long.parseLong(sc.readLine());
 
         // bottom-up 방식 
-        System.out.println(fibonacci.bottomUp(19));
-
-        // top-down 방식
-        System.out.println(fibonacci.topDown(20));
+        System.out.println(fibonacci.bottomUp(n) % 1000000);
     }
 }
