@@ -1,7 +1,8 @@
 package com.lafin.knowledge.algorithm.programmers;
 
-import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.*;
+import java.util.Map.*;
+import java.util.stream.IntStream;
 
 /**
  * [해시] 베스트 앨범에 수록될 앨범들의 정렬
@@ -17,26 +18,80 @@ import java.util.HashMap;
  *  ["classic", "pop", "classic", "classic", "pop"]	[500, 600, 150, 800, 2500]	[4, 1, 3, 0]
   */
 public class BestAlbum {
+
+	class Album {
+		private int idx;
+		private int plays;
+
+		public Album(int idx, int plays) {
+			this.idx = idx;
+			this.plays = plays;
+		}
+
+		public int getIdx() {
+			return idx;
+		}
+
+		public int getPlays() {
+			return plays;
+		}
+	}
 	
 	public int[] solution(String[] genres, int[] plays) {
-        int[] answer = {};
+        ArrayList<Integer> answer = new ArrayList<>();
         
-        // 고유번호 맵
-        HashMap<String, ArrayList<Integer>> seqList = new HashMap<>();
-        
-        // 장르별 재생 수 맵
-        HashMap<String, Integer> playCnt = new HashMap<>();
-        
-        for(int i=0; i<genres.length; i++) {
-        	
-        	// 리스트에 해당 장르의 고유번호를 저장
-        	ArrayList<Integer> currentList = seqList.get(i) == null ? new ArrayList<Integer>() : seqList.get(i);
-        	currentList.add(i);
-        	
-        	// 재생 수를 누적하여 저장
+        // 장르별 총 재생 횟수
+        Map<String, Integer> genresStat = new HashMap<>();
+
+		// 장르별 노래 정보 
+		Map<String, List<Album>> albumInfo = new HashMap<>();
+
+		// 장르, 재생횟수 만큼 반복
+        for (int i = 0; i < genres.length; i++) {
+            String genre = genres[i];
+            int play = plays[i];
+
+			// 장르별 재생 횟수 총 합을 구하기 위해 장르에 재생횟수를 누적합
+            genresStat.put(genre, genresStat.getOrDefault(genre, 0) + play);
+
+			// 장르별 노래 정보를 저장
+			List<Album> albumList = albumInfo.getOrDefault(genre, new ArrayList<>());
+			albumList.add(new Album(i, play));
+			albumInfo.put(genre, albumList);
         }
         
-        return answer;
+        // 장르별 재생횟수 내림차순으로 정렬
+		List<Entry<String, Integer>> statEntry = new ArrayList<>(genresStat.entrySet());
+		Collections.sort(statEntry, new Comparator<Entry<String, Integer>>(){
+			@Override
+			public int compare(Entry<String, Integer> o1, Entry<String, Integer> o2) {
+				// 내림차순 정렬
+				return o2.getValue().compareTo(o1.getValue());
+			}
+		});
+
+		// 재생 횟수가 큰 장르부터 2개씩 앨범을 고른다
+		for(Entry<String, Integer> entry : statEntry) {
+			int limit = 2;
+			String genre = entry.getKey();
+
+			List<Album> albumList = albumInfo.get(genre);
+			albumList.sort(new Comparator<Album>(){
+				@Override
+				public int compare(Album o1, Album o2) {					
+					return o2.getPlays() - o1.getPlays();
+				}
+			});
+
+			for (Album album : albumList) {
+				if (limit == 0) break;
+				answer.add(album.getIdx());
+				limit--;
+			}
+		}
+        
+        
+        return answer.stream().mapToInt(i -> i).toArray();
     }
 	
 	
@@ -46,7 +101,9 @@ public class BestAlbum {
 		String[] genres = {"classic", "pop", "classic", "classic", "pop"};
 		int[] plays = {500, 600, 150, 800, 2500};
 		
+		System.out.print("정답 : " );
 		int[] rank = ba.solution(genres, plays);
-		System.out.println("정답 : " + rank);
+		IntStream.of(rank).forEach(System.out::print);
+		
 	}
 }
