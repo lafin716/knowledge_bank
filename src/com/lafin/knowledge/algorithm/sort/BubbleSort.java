@@ -1,6 +1,6 @@
 package com.lafin.knowledge.algorithm.sort;
 
-import com.lafin.knowledge.ds.DynamicArray;
+import java.util.List;
 
 /**
  * 버블정렬 클래스
@@ -8,11 +8,11 @@ import com.lafin.knowledge.ds.DynamicArray;
  * @author lafin
  *
  */
-public class BubbleSort {
+public class BubbleSort implements Sort {
 	
 	// 정렬 메소드
-	public static DynamicArray sort(DynamicArray origin) {
-		DynamicArray sorted = origin;
+	public List<Integer> sort(List<Integer> origin) {
+		List<Integer> sorted = origin;
 		boolean isReplaced = true;
 		
 		// 한번도 스왑이 일어나지 않을 때까지 반복
@@ -39,22 +39,18 @@ public class BubbleSort {
 	
 	// 테스트
 	public static void main(String[] args) {
-		DynamicArray<Integer> data = new DynamicArray<Integer>();
-		
-		// 랜덤하게 데이터를 넣는다
-		for(int i=0; i<100; i++) {
-			
-			// 1 ~ 100 까지 랜덤한 수 생성
-			int random = (int) ((Math.random() * 100) + 1);			
-			data.add(random);
-		}
-		
-		System.out.println("정렬 전 배열 출력");
-		data.print();
-		
-		// 버블정렬 실행
-		data = BubbleSort.sort(data);
-		System.out.println("정렬 후 배열 출력");
-		data.print();
+		BubbleSort bubbleSort = new BubbleSort();
+
+		List<Integer> data = SortData.getRandomDatas(100);
+
+        long start = System.nanoTime();
+        System.out.println("======= 정렬 전 ========");
+        SortData.printList(data);
+        List<Integer> sortedData = bubbleSort.sort(data);
+        System.out.println("======= 정렬 후 ========");
+        SortData.printList(sortedData);
+		long end = System.nanoTime();
+
+        System.out.println("수행시간: " + ((end - start) / 1000000000f) + " sec");
 	}
 }
