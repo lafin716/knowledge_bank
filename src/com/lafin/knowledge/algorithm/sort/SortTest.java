@@ -1,16 +1,36 @@
 package com.lafin.knowledge.algorithm.sort;
 
+import java.text.NumberFormat;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 public class SortTest {
 
+    private NumberFormat format = NumberFormat.getInstance();
+
+    // 정렬 팩토리
+    public void doTest(Set<Integer> data, Sort sortObject) {
+        // System.out.println("정렬 데이터 ==================================");
+        long start1 = System.nanoTime();
+        // SortData.printList(); 
+        sortObject.sort(new ArrayList<>(data));
+        long end1 = System.nanoTime();
+        
+        format.setGroupingUsed(false);
+        System.out.println(" 소요시간 : " + format.format((end1 - start1) / 1000000000.0) + " sec") ;
+    }
+
     // 정렬 팩토리
     public void doTest(List<Integer> data, Sort sortObject) {
-        System.out.println("정렬 데이터 ==================================");
+        // System.out.println("정렬 데이터 ==================================");
         long start1 = System.nanoTime();
-        SortData.printList(sortObject.sort(data)); 
+        sortObject.sort(data);
+        // SortData.printList(sortObject.sort(data)); 
         long end1 = System.nanoTime();
-        System.out.println("소요시간 : " + ((end1 - start1) / 1000000000f) + " sec");
+
+        format.setGroupingUsed(false);
+        System.out.println(" 소요시간 : " + format.format((end1 - start1) / 1000000000.0) + " sec") ;
     }
     
     public static void main(String[] args) {
@@ -18,9 +38,9 @@ public class SortTest {
         SortTest test = new SortTest();
 
         // 무작위 데이터
-        List<Integer> data = SortData.getRandomDatas();
+        Set<Integer> data = SortData.getRandomUniqueDatas(60000);
         System.out.println("원본 데이터 ==================================");
-        SortData.printList(data);
+        // SortData.printList(data);
 
         /**
          * 안정정렬
@@ -35,6 +55,10 @@ public class SortTest {
         // 삽입 정렬
         System.out.print("삽입");
         test.doTest(data, new InsertSort());
+
+        // 병합 정렬
+        System.out.print("병합");
+        test.doTest(data, new MergeSort());
 
 
         /**

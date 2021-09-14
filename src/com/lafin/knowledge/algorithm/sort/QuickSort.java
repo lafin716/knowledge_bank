@@ -24,7 +24,7 @@ public class QuickSort implements Sort {
             }
 
             while (right > start && list.get(right) >= list.get(pivot)) {
-                right++;
+                right--;
             }
 
             if (left > right) {
