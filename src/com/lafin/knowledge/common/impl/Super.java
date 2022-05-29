@@ -1,8 +1,7 @@
 package com.lafin.knowledge.common.impl;
 
-import javax.servlet.http.HttpServletRequest;
 
-public class Super extends HttpServletRequest {
+public class Super {
 
     int A = 1993;
 
